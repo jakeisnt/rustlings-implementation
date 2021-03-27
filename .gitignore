@@ -1,0 +1,14 @@
+*.swp
+target/
+**/*.rs.bk
+.DS_Store
+*.pdb
+exercises/clippy/Cargo.toml
+exercises/clippy/Cargo.lock
+.idea
+.vscode
+
+.direnv/*
+!.direnv/.git-keep
+result
+result-bin
