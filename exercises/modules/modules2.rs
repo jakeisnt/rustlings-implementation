@@ -1,11 +1,11 @@
 // modules2.rs
 // Make me compile! Execute `rustlings hint modules2` for hints :)
 
-// I AM NOT DONE
-
+// This does not have to be public to use public child modules.
 mod delicious_snacks {
-    use self::fruits::PEAR as fruit;
-    use self::veggies::CUCUMBER as veggie;
+    // Can import modules, then expose - or use - them publicly.
+    pub use self::fruits::PEAR as fruit;
+    pub use self::veggies::CUCUMBER as veggie;
 
     mod fruits {
         pub const PEAR: &'static str = "Pear";
