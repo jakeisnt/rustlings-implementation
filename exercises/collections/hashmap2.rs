@@ -12,8 +12,6 @@
 // Execute the command `rustlings hint collections4` if you need
 // hints.
 
-// I AM NOT DONE
-
 use std::collections::HashMap;
 
 #[derive(Hash, PartialEq, Eq)]
@@ -38,6 +36,13 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         // TODO: Put new fruits if not already present. Note that you
         // are not allowed to put any type of fruit that's already
         // present!
+
+        // Accepts an unwrapped type - as the object itself is easier to hash
+        // and check equality with, maybe?
+        if !basket.contains_key(&fruit) {
+            // Accepts a wrapped type - as this is the public type the hashmap uses.
+            basket.insert(fruit, 420);
+        }
     }
 }
 
