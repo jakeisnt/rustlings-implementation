@@ -2,11 +2,11 @@
 // Make me compile without changing the function signature!
 // Execute `rustlings hint strings2` for hints :)
 
-// I AM NOT DONE
-
 fn main() {
+    // To create a string, you need to wrap it with the constructor or use .to_string()
     let word = String::from("green"); // Try not changing this line :)
-    if is_a_color_word(word) {
+    // Generally, it's passed as the unwrapped type rather than the wrapped one
+    if is_a_color_word(&word) {
         println!("That is a color word I know!");
     } else {
         println!("That is not a color word I know.");
