@@ -3,6 +3,7 @@
 // I AM NOT DONE
 
 pub fn factorial(num: u64) -> u64 {
+
     // Complete this function to return the factorial of num
     // Do not use:
     // - return
@@ -12,6 +13,10 @@ pub fn factorial(num: u64) -> u64 {
     // For an extra challenge, don't use:
     // - recursion
     // Execute `rustlings hint iterators4` for hints.
+
+    // a range can already be iterated on
+    // range uses parens, Range uses brackets. Different!
+    (1..=num).product() // .fold(1, |acc, x| x as u64 * acc)
 }
 
 #[cfg(test)]
