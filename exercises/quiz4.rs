@@ -5,7 +5,31 @@
 
 // Write a macro that passes the quiz! No hints this time, you can do it!
 
-// I AM NOT DONE
+
+// This works, but it's corny. Let's see if we can do better.
+// #[macro_use]
+// mod macros {
+//     macro_rules! my_macro {
+//         ("world!") => {
+//             "Hello world!"
+//         };
+//         ("goodbye!") => {
+//             "Hello goodbye!"
+//         };
+//     }
+// }
+
+
+#[macro_use]
+mod macros {
+    macro_rules! my_macro {
+        // Macros can use other macros - nice!
+        // Can't forget the '$' metavariable references.
+        ($arg:expr) => {
+            format!("Hello {}", $arg)
+        };
+    }
+}
 
 #[cfg(test)]
 mod tests {
