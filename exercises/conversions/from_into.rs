@@ -33,10 +33,37 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of Person
 // Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
-
+// Is there a beter way to do this? There has to be...
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        if !(s.len() == 0) {
+            let mut sArr: Vec<&str> = s.split(",").collect();
+            if sArr.len() == 2 {
+                let mut sArr = sArr.iter();
+                if let Some(name) = sArr.next()  {
+                    if name.len() > 0 {
+                        if let Some(ageX) = sArr.next() {
+                            let age = ageX.parse::<usize>();
+                            if let Ok(age) = age {
+                                Person { name: name.to_string(), age }
+                            } else {
+                                Person::default()
+                            }
+                        } else {
+                            Person::default()
+                        }
+                    } else {
+                        Person::default()
+                    }
+                } else {
+                    Person::default()
+                }
+            } else {
+                Person::default()
+            }
+        } else {
+            Person::default()
+        }
     }
 }
 

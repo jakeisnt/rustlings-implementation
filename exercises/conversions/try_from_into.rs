@@ -11,8 +11,6 @@ struct Color {
     blue: u8,
 }
 
-// I AM NOT DONE
-
 // Your task is to complete this implementation
 // and return an Ok result of inner type Color.
 // You need to create an implementation for a tuple of three integers,
@@ -25,19 +23,49 @@ struct Color {
 // Tuple implementation
 impl TryFrom<(i16, i16, i16)> for Color {
     type Error = String;
-    fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {}
+    fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
+        let (r, g, b) = tuple;
+        let red = u8::try_from(r);
+        let green = u8::try_from(g);
+        let blue = u8::try_from(b);
+
+        match (red, green, blue) {
+            (Ok(red), Ok(green), Ok(blue)) => Ok(Color { red, green, blue }),
+            (Err(e), b, c) => Err(e.to_string()),
+            (b, Err(e), c) => Err(e.to_string()),
+            (b, c, Err(e)) => Err(e.to_string()),
+        }
+    }
 }
 
 // Array implementation
 impl TryFrom<[i16; 3]> for Color {
     type Error = String;
-    fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {}
+    fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {
+        let [r, g, b] = arr;
+        Self::try_from((r, g, b))
+    }
 }
 
 // Slice implementation
 impl TryFrom<&[i16]> for Color {
     type Error = String;
-    fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {}
+    fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {
+        let mut iter = slice.iter();
+        let r = iter.next();
+        let g = iter.next();
+        let b = iter.next();
+        if iter.next() != None {
+            Err("The array was too large".to_string())
+        } else {
+            match (r, g, b) {
+                (Some(red), Some(green), Some(blue)) => Self::try_from((*red, *green, *blue)),
+                (Some(_r), Some(_g), _a) => Err("The array wasn't large enough".to_string()),
+                (Some(r), _b, _c) => Err("The array wasn't large enough".to_string()),
+                (_a, _b, _c) => Err("The array wasn't large enough".to_string()),
+            }
+        }
+    }
 }
 
 fn main() {
